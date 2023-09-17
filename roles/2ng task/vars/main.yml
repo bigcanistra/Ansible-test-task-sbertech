@@ -1,0 +1,35 @@
+---
+pkg_list_ubuntu:
+  - autoconf
+  - automake
+  - jq
+  - libcrack2
+  - libcurl
+  - libjsoncpp
+  - libtool
+  - libyaml-0-2
+  - logrotate
+  - openssl
+  - perl-openssl-defaults
+  - python3-pip
+  - python3.6
+  - python3.6-dev
+
+pkg_list_RHEL:
+  - expect
+  - jq
+  - jsoncpp
+  - libcurl
+  - libyaml
+  - logrotate
+  - nmap
+  - openssl
+  - perl-DBD-Pg
+  - perl-DBI
+  - perl-Time-HiRes
+  - python3-pip
+  - python36
+  - python36-devel
+  - python36-virtualenv
+  - rsyslog
+  - uuid

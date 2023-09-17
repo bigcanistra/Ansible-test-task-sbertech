@@ -1,0 +1,10 @@
+---
+- name: Run all test task
+  hosts: all
+  remote_user: root
+  become: yes
+  max_fail_percentage: 100
+  roles:
+    - 1st task
+    - 2nd task
+    - 3rd task

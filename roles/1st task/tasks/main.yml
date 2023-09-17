@@ -1,0 +1,31 @@
+---
+- set_fact:
+    mount: "{{ ansible_mounts | first }}"
+
+- set_fact: disk_free_space="{{ mount.size_available }}"
+- set_fact: disk_free_space_s="{{ (((disk_free_space|float / 1024 ) / 1024 ) / 1024) | round(1, 'common') }}GB"
+- set_fact: disk_total="{{ mount.size_total }}"
+- set_fact: disk_total_s="{{ (((mount.size_total|float / 1024 ) / 1024 ) / 1024) | round(1, 'common') }}GB"
+
+
+- debug:
+    msg: "Disk free space {{ disk_free_space }} of total {{ disk_total_s }}. (Should be within limit 10Gb})"
+
+- name: Check host disk size less then 10Gb
+  fail:
+    msg: "Fail if disk size less then 10Gb"
+  when: {{disk_free_space}} < 1073741824
+  any_errors_fatal: true
+
+- name: Get line with /tmp from /etc/fstab
+  slurp:
+    src: /etc/fstab
+    register: tmpline
+
+- name: Ensure /etc/fstab contains /tmpfs
+  set_fact: noexec_s="{{ tmpline['content'] | b64decode | regex_findall('noexec') | first }}"
+
+- name: Fails if /tmp mounted whith noexec
+  fail:
+    msg: "/etc/fstab has /tmp as noexec"
+  when: {{noexec_s}} == 'noexec'

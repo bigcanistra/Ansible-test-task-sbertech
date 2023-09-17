@@ -1,0 +1,7 @@
+# Add host ip and ssh port (ansible_ssh_port={ }) optional
+# Example for localhost:
+#
+# LocalHost ansible_ssh_host=127.0.0.1 ansible_ssh_user=ubuntu ansible_ssh_private_key_file=~/.ssh/id_rsa_ubuntu_user_old
+
+Ubnuntu ansible_ssh_host=127.0.0.100 ansible_ssh_private_key_file=~/.ssh/id_rsa
+RHEL ansible_ssh_host=127.0.0.200 ansible_ssh_private_key_file=~/.ssh/id_rsa

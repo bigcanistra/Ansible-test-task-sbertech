@@ -1,0 +1,8 @@
+---
+- name: Put config file
+  template:
+      src: "test_config.conf.j2"
+      dest: "/etc/postgres/test_config.conf"
+      backup: yes
+      owner: postgres
+      mode: 644

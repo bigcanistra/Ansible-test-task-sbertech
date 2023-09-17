@@ -70,3 +70,4 @@ postgresql:
         logical_decoding_work_mem: кол-во оперативной памяти делённое на 4 (единица измерения ГБ) 
         auth_activity_period: '60
 ```
+В процессе работы плэйбука создать конфиг из шаблона по пути /etc/postgres/test_config.conf с владельцем УЗ postgres и разрешением на изменение только postgres, а чтение любому пользователю ОС.

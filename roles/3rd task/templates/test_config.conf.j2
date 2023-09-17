@@ -1,0 +1,16 @@
+postgresql:
+    parameters:
+        max_connections : '{{ hostvars['all']['ansible_facts']['ansible_processor_vcpus']}} * 5'
+        max_locks_per_transaction: '64'
+        max_worker_processes: '{{ hostvars['all']['ansible_facts']['ansible_processor_vcpus']}} * 3'
+        max_prepared_transactions: {% if 'Ubuntu' in 'ansible_facts']['distribution'] %}
+                                      '{{ hostvars['all']['ansible_facts']['ansible_processor_vcpus']}} * 6'
+                                   {% else %}
+                                      '{{ hostvars['all']['ansible_facts']['ansible_processor_vcpus']}} * 4'
+                                   {% endif %}
+        wal_level: 'replica'
+        wal_log_hints: on
+        track_commit_timestamp: off
+        wal_keep_size: '8GB'
+        logical_decoding_work_mem: '{{ hostvars['all']['ansible_facts']['ansible_memtotal_mb']}} /(4*1024)'
+        auth_activity_period: '60'

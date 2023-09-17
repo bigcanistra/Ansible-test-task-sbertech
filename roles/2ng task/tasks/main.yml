@@ -1,0 +1,16 @@
+---
+- name: Install packages Ubuntu
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+    install_recommends: yes
+  with_items: "{{ pkg_list_ubuntu }}"
+  when: (ansible_distribution == "Ubuntu" and ansible_distribution_release == "bionic")
+
+- name: Install pacages RHEL
+  yum:
+    pkg: "{{ item }}"
+    state: latest
+    install_recommends: yes
+  with_items: "{{ pkg_list_RHEL }}"
+  when: (ansible_distribution == "RedHat" and ansible_distribution_version == "7.9")
